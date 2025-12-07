@@ -1,0 +1,259 @@
+<!--
+  Repository: rs-bismo-sejahtera-github-theme
+  How to use:
+    1. Save this file as /index.html
+    2. Add additional files listed below into your repo (README.md, LICENSE, assets/)
+    3. Push to GitHub and enable GitHub Pages on the repository (branch: main, folder: / (root))
+
+  This single file contains the main website template. Below the HTML you'll find a README and MIT license that
+  you can copy into separate files in your repository. Customize images, text, and links as needed.
+-->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RS Bismo Sejahtera - Healthcare Template</title>
+  <meta name="description" content="Template website rumah sakit / klinik - siap dipakai untuk GitHub Pages">
+  <meta name="theme-color" content="#2563eb">
+  <style>
+    :root{
+      --bg:#f6fbff;
+      --card:#ffffff;
+      --accent:#2563eb;
+      --muted:#6b7280;
+      --radius:12px;
+      --shadow: 0 6px 18px rgba(16,24,40,0.08);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#f6fbff 0%, #ffffff 100%);color:#0f172a;line-height:1.5}
+    a{color:var(--accent);text-decoration:none}
+    header{background:transparent;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;gap:12px;align-items:center}
+    .logo img{width:48px;height:48px;border-radius:8px;object-fit:cover}
+    nav{display:flex;gap:18px;align-items:center}
+    .btn{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;box-shadow:var(--shadow);border:0;cursor:pointer}
+
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;padding:28px 0}
+    .hero h1{font-size:28px;margin:0 0 12px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .search-card{background:var(--card);padding:18px;border-radius:16px;box-shadow:var(--shadow)}
+    .form-row{display:flex;gap:8px}
+    input[type=text], input[type=email], textarea, select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef8}
+
+    /* Services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+    .card{background:var(--card);padding:18px;border-radius:14px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted)}
+
+    /* Team */
+    .team{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+    .avatar{width:100%;height:220px;border-radius:10px;object-fit:cover}
+
+    /* Footer */
+    footer{padding:28px 0;color:var(--muted)}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .services,.team{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:560px){
+      header{padding:12px}
+      .services,.team{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo container" style="max-width:unset">
+      <img src="https://raw.githubusercontent.com/google/material-design-icons/master/filled/1x_web/ic_local_hospital_white_48dp.png" alt="logo">
+      <div>
+        <strong>RS Bismo Sejahtera</strong><br>
+        <small class="muted">Perawatan, Kepercayaan, Kepedulian</small>
+      </div>
+    </div>
+    <nav class="container" style="justify-content:flex-end;max-width:unset">
+      <a href="#services">Layanan</a>
+      <a href="#doctors">Dokter</a>
+      <a href="#contact">Kontak</a>
+      <button class="btn">Buat Janji</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Pelayanan Kesehatan Terpercaya untuk Anda dan Keluarga</h1>
+        <p>Kami menyediakan layanan medis lengkap: rawat inap, IGD 24 jam, laboratorium, rontgen, dan layanan spesialis dengan tenaga profesional berpengalaman.</p>
+        <div style="display:flex;gap:10px;margin-top:14px;">
+          <a class="btn" href="#contact">Hubungi Kami</a>
+          <a href="#services" style="align-self:center">Lihat Layanan →</a>
+        </div>
+
+        <div style="margin-top:22px;" class="card">
+          <strong>Cari Layanan / Buat Janji</strong>
+          <div style="margin-top:10px" class="form-row">
+            <input type="text" placeholder="Nama atau layanan">
+            <select aria-label="Pilih layanan">
+              <option>Poli Umum</option>
+              <option>Poli Gigi</option>
+              <option>Laboratorium</option>
+              <option>IGD</option>
+            </select>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <input type="text" placeholder="Tanggal (YYYY-MM-DD)">
+            <input type="text" placeholder="Jam">
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn">Kirim</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="search-card">
+        <img src="https://images.unsplash.com/photo-1584438788189-7f0f0c5d7a1b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="clinic" style="width:100%;border-radius:10px;object-fit:cover;height:260px">
+        <div style="margin-top:12px">
+          <h3 style="margin:0">Layanan IGD 24 Jam</h3>
+          <p class="muted" style="margin:6px 0 0">Tim gawat darurat kami siap menangani kondisi serius dengan cepat dan aman.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="services">
+      <h2>Layanan Kami</h2>
+      <div class="services">
+        <div class="card">
+          <h3>Rawat Inap</h3>
+          <p class="muted">Kamar VIP, Kelas I - III dengan fasilitas lengkap dan perawatan 24 jam.</p>
+        </div>
+        <div class="card">
+          <h3>Poliklinik & Spesialis</h3>
+          <p class="muted">Dokter spesialis jantung, anak, bedah, dan kandungan tersedia setiap hari.</p>
+        </div>
+        <div class="card">
+          <h3>Laboratorium & Radiologi</h3>
+          <p class="muted">Pemeriksaan lengkap—hasil cepat dan akurat.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="doctors">
+      <h2>Tim Profesional</h2>
+      <div class="team">
+        <div class="card">
+          <img class="avatar" src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Dr. A">
+          <h3>dr. Aditya</h3>
+          <p class="muted">Spesialis Penyakit Dalam</p>
+        </div>
+        <div class="card">
+          <img class="avatar" src="https://images.unsplash.com/photo-1555992336-03a23c4b5f26?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Dr. B">
+          <h3>dr. Siti</h3>
+          <p class="muted">Spesialis Anak</p>
+        </div>
+        <div class="card">
+          <img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Dr. C">
+          <h3>dr. Nugroho</h3>
+          <p class="muted">Spesialis Bedah</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Kontak & Lokasi</h2>
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-bottom:28px">
+        <div class="card">
+          <h3>Hubungi Kami</h3>
+          <p class="muted">Jl. Contoh No.123, Kota Contoh — Telepon: (0271) 123456</p>
+          <form style="margin-top:10px">
+            <input type="text" placeholder="Nama" required style="margin-bottom:8px">
+            <input type="email" placeholder="Email" required style="margin-bottom:8px">
+            <textarea placeholder="Pesan" rows="4" style="margin-bottom:8px"></textarea>
+            <div style="text-align:right"><button class="btn" type="button">Kirim Pesan</button></div>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Jam Operasional</h3>
+          <p class="muted">IGD 24 Jam<br>Poli: Senin - Jumat, 08.00 - 16.00</p>
+          <h4 style="margin-top:12px">Peta</h4>
+          <div style="background:#eef6ff;border-radius:8px;padding:12px;margin-top:8px">(Tempat untuk embed Google Maps — ganti dengan iframe Google Maps)</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>RS Bismo Sejahtera</strong>
+        <p class="muted">Memberikan perawatan terbaik untuk masyarakat.</p>
+      </div>
+      <div>
+        <h4>Link Cepat</h4>
+        <p><a href="#services">Layanan</a> · <a href="#doctors">Dokter</a> · <a href="#contact">Kontak</a></p>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <p class="muted">Instagram · Facebook · Twitter</p>
+      </div>
+    </div>
+    <div style="text-align:center;padding:14px 0;border-top:1px solid #eef2ff;margin-top:18px" class="container">
+      <small class="muted">© 2025 RS Bismo Sejahtera — Template dibuat untuk GitHub Pages</small>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<!-- README.md (copy into repo root as README.md) -->
+
+<!--
+# RS Bismo Sejahtera — GitHub Pages Theme
+
+Sebuah tema sederhana untuk menampilkan laman rumah sakit / klinik menggunakan GitHub Pages. Cukup letakkan file `index.html` pada root repo dan aktifkan GitHub Pages.
+
+## Cara pakai
+1. Buat repository baru (contoh: `username.github.io` atau repo biasa)
+2. Tambahkan file `index.html` (isi: file ini)
+3. Tambahkan `README.md` dan `LICENSE` sesuai kebutuhan
+4. Push ke GitHub dan aktifkan Pages (Settings → Pages → pilih branch `main` dan folder `/`)
+
+## Kustomisasi cepat
+- Ganti teks nama rumah sakit di bagian header
+- Ganti gambar pada tag `<img>` dengan URL dari folder `assets/`
+- Untuk form aktif, integrasikan Formspree, Netlify Forms, atau backend Anda sendiri
+-->
+
+<!-- LICENSE (MIT) -->
+
+<!--
+MIT License
+
+Copyright (c) 2025 RS Bismo Sejahtera
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
