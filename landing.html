@@ -5,144 +5,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pengertian Pneumonia</title>
   <style>
-    :root{
-      --bg: #f7fafc;
-      --card: #ffffff;
-      --accent: #2563eb;
-      --muted: #6b7280;
-      --radius: 12px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    body{
-      margin:0;
-      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
-      color:#0f172a;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:32px;
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-      min-height:100vh;
-    }
-    .container{
-      width:100%;
-      max-width:900px;
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow: 0 8px 30px rgba(2,6,23,0.08);
-      padding:28px;
-    }
-    header h1{
-      margin:0 0 6px 0;
-      font-size:1.6rem;
-    }
-    header p{
-      margin:0 0 18px 0;
-      color:var(--muted);
-    }
-    section{
-      margin-bottom:18px;
-    }
-    h2{
-      font-size:1.05rem;
-      margin:0 0 8px 0;
-      color:var(--accent);
-    }
-    p, li{
-      line-height:1.6;
-      color:#111827;
-    }
-    ul { padding-left:1.1rem; margin:6px 0; }
-    footer{
-      margin-top:12px;
-      font-size:0.9rem;
-      color:var(--muted);
-      border-top:1px dashed #e6e9ef;
-      padding-top:12px;
-    }
-    .note{
-      background:#fff8e6;
-      border-left:4px solid #f59e0b;
-      padding:10px 12px;
-      border-radius:8px;
-      color:#92400e;
-      font-weight:500;
-    }
-
-    /* Responsive */
-    @media (max-width:520px){
-      body{ padding:18px; }
-      .container{ padding:18px; }
-    }
+    :root{ --bg:#f6fbff; --card:#ffffff; --accent:#0b7285; --muted:#556677; }
+    body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#eef8ff 0%,var(--bg) 100%); color:#122; margin:0; padding:24px;}
+    .container{max-width:900px;margin:0 auto;padding:20px}
+    header{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+    header img{width:72px;height:72px;border-radius:10px;object-fit:cover;box-shadow:0 6px 18px rgba(11,114,133,0.08)}
+    h1{margin:0;font-size:24px;color:var(--accent)}
+    p.lead{margin:8px 0 20px;color:var(--muted)}
+    .card{background:var(--card);border-radius:12px;box-shadow:0 8px 24px rgba(13,38,59,0.06);padding:18px;margin-bottom:16px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:16px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr}}
+    .images{display:flex;flex-direction:column;gap:12px}
+    figure{margin:0;background:#fbfeff;border-radius:8px;padding:8px;display:flex;flex-direction:column;align-items:center}
+    figure img{max-width:100%;border-radius:6px;display:block}
+    figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+    ul{margin:0 0 12px 18px}
+    .small{font-size:14px;color:var(--muted)}
+    footer{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
   </style>
 </head>
 <body>
-  <main class="container" role="main">
+  <div class="container">
     <header>
-      <h1>Pengertian Pneumonia</h1>
-      <p>Ringkasan singkat mengenai apa itu pneumonia, penyebab, gejala, dan pencegahannya.</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Respiratory_system.svg" alt="Ilustrasi sistem pernapasan">
+      <div>
+        <h1>Pengertian Pneumonia</h1>
+        <p class="lead">Ringkasan singkat tentang apa itu pneumonia, penyebab, gejala, dan pencegahannya disertai gambar paru-paru dan foto rontgen.</p>
+      </div>
     </header>
 
-    <section aria-labelledby="def">
-      <h2 id="def">Apa itu Pneumonia?</h2>
-      <p>
-        Pneumonia adalah infeksi pada paru-paru yang menyebabkan jaringan paru (alveoli) terisi oleh cairan atau nanah sehingga mengganggu pertukaran oksigen.
-        Kondisi ini dapat bervariasi dari ringan hingga berat, dan dapat menyerang siapa saja — mulai dari bayi, orang tua, hingga orang dewasa sehat.
-      </p>
-    </section>
+    <div class="grid">
+      <main>
+        <section class="card">
+          <h2>Apa itu pneumonia?</h2>
+          <p>Pneumonia adalah infeksi pada paru-paru yang menyebabkan kantung udara kecil (alveoli) menjadi meradang dan terisi cairan atau nanah. Hal ini mengganggu pertukaran oksigen dan karbon dioksida sehingga penderitanya mungkin mengalami sesak napas dan penurunan kadar oksigen dalam darah.</p>
+        </section>
 
-    <section aria-labelledby="causes">
-      <h2 id="causes">Penyebab</h2>
-      <ul>
-        <li><strong>Bakteri</strong> (contoh: Streptococcus pneumoniae) — penyebab umum pneumonia bakteri.</li>
-        <li><strong>Virus</strong> (contoh: influenza, RSV) — sering menyebabkan pneumonia pada anak-anak dan lanjut usia.</li>
-        <li><strong>Jamur</strong> — pada orang dengan sistem kekebalan lemah.</li>
-        <li><strong>Aspirasi</strong> — masuknya makanan, minuman, atau muntahan ke saluran napas dapat memicu pneumonia.</li>
-      </ul>
-    </section>
+        <section class="card">
+          <h2>Penyebab</h2>
+          <ul>
+            <li>Bakteri (contoh: <em>Streptococcus pneumoniae</em>).</li>
+            <li>Virus (mis. influenza, RSV, SARS-CoV-2).</li>
+            <li>Jamur (lebih jarang, biasanya pada orang dengan imunitas lemah).</li>
+            <li>Aspirasi (masuknya material dari mulut/kerongkongan ke saluran napas).</li>
+          </ul>
+          <p class="small">Jenis pengobatan bergantung pada penyebab: antibiotik untuk bakteri, antivirus/terapi suportif untuk virus, dan antijamur untuk infeksi jamur.</p>
+        </section>
 
-    <section aria-labelledby="symptoms">
-      <h2 id="symptoms">Gejala Umum</h2>
-      <ul>
-        <li>Batuk — bisa berdahak atau kering.</li>
-        <li>Demam, menggigil, atau berkeringat.</li>
-        <li>Sulit bernapas atau napas cepat.</li>
-        <li>Nyeri dada yang bertambah saat bernapas atau batuk.</li>
-        <li>Kelelahan, nafsu makan menurun.</li>
-      </ul>
-      <p class="note">Catatan: gejala bisa lebih ringan pada orang dewasa muda dan lebih tidak khas pada lansia (mis. kebingungan, penurunan kesadaran).</p>
-    </section>
+        <section class="card">
+          <h2>Gejala umum</h2>
+          <ul>
+            <li>Demam dan menggigil</li>
+            <li>Batuk (dengan atau tanpa dahak berwarna)</li>
+            <li>Sesak napas atau napas cepat</li>
+            <li>Nyeri dada saat bernapas atau batuk</li>
+            <li>Merasa lelah dan kehilangan nafsu makan</li>
+          </ul>
+        </section>
 
-    <section aria-labelledby="diagnosis">
-      <h2 id="diagnosis">Diagnosa</h2>
-      <p>
-        Diagnosis biasanya dibuat dari riwayat klinis, pemeriksaan fisik (suara napas abnormal), dan pemeriksaan penunjang seperti foto rontgen dada.
-        Tes tambahan bisa meliputi pemeriksaan darah, kultur dahak, atau tes cepat untuk agen tertentu.
-      </p>
-    </section>
+        <section class="card">
+          <h2>Pencegahan dan tindakan</h2>
+          <ul>
+            <li>Vaksinasi (mis. vaksin pneumokokus, vaksin influenza).</li>
+            <li>Cuci tangan dan etika batuk/bersin.</li>
+            <li>Berhenti merokok dan jaga kebersihan lingkungan.</li>
+            <li>Segera ke fasilitas kesehatan jika mengalami gejala berat (sesak hebat, warna kebiruan pada bibir/ujung jari, penurunan kesadaran).</li>
+          </ul>
+        </section>
 
-    <section aria-labelledby="treatment">
-      <h2 id="treatment">Pengobatan Singkat</h2>
-      <p>
-        Pengobatan tergantung penyebab: pneumonia bakteri diobati dengan antibiotik, pneumonia virus mungkin memerlukan perawatan suportif dan kadang antivirus.
-        Perawatan pendukung termasuk istirahat, cairan yang cukup, dan pengelolaan gejala (mis. antipiretik untuk demam).
-      </p>
-    </section>
+        <section class="card">
+          <h2>Catatan penting</h2>
+          <p>Pneumonia dapat ringan hingga berat. Bayi, lansia, dan orang dengan gangguan sistem imun berisiko mengalami komplikasi serius—oleh karena itu diagnosis dini dan perawatan yang tepat sangat penting.</p>
+        </section>
+      </main>
 
-    <section aria-labelledby="prevention">
-      <h2 id="prevention">Pencegahan</h2>
-      <ul>
-        <li>Vaksinasi (mis. vaksin pneumokokus, vaksin influenza) bagi kelompok berisiko.</li>
-        <li>Cuci tangan rutin dan etika batuk/bersin untuk mengurangi penyebaran mikroorganisme.</li>
-        <li>Berhenti merokok dan kelola kondisi kronis (mis. diabetes, penyakit jantung).</li>
-      </ul>
-    </section>
+      <aside>
+        <div class="card images">
+          <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Respiratory_system.svg" alt="Diagram sistem pernapasan manusia" />
+            <figcaption>Diagram saluran napas dan paru-paru (ilustrasi).</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Pneumonia.jpg" alt="Rontgen dada menunjukkan pneumonia" />
+            <figcaption>Rontgen dada (chest X-ray) yang menunjukkan area keburaman pada paru akibat pneumonia.</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Normal_and_Pneumonia_Chest_XRay_Comparison.png" alt="Perbandingan paru normal dan pneumonia" />
+            <figcaption>Perbandingan rontgen paru normal dan paru dengan pneumonia.</figcaption>
+          </figure>
+
+          <p class="small">Sumber gambar: Wikimedia Commons (lisensi publik atau bebas pakai). Jika Anda ingin menggunakan gambar lokal, ganti atribut <code>src</code> dengan path file Anda (mis. <code>images/paruparu.png</code>).</p>
+        </div>
+
+        <div class="card">
+          <h3>Cetak / Simpan</h3>
+          <p class="small">Klik tombol berikut untuk mencetak halaman ini atau menyimpannya sebagai PDF melalui dialog cetak browser.</p>
+          <a href="#" class="btn" onclick="window.print();return false;">Cetak / Simpan PDF</a>
+        </div>
+      </aside>
+    </div>
 
     <footer>
-      <p><strong>Kapan harus ke fasilitas kesehatan?</strong> Segera cari layanan medis bila mengalami demam tinggi, kesulitan bernapas, nyeri dada hebat, atau gejala yang memburuk.</p>
-      <p>Informasi ini bersifat edukatif dan tidak menggantikan nasihat medis profesional.</p>
+      Halaman edukasi sederhana — bukan pengganti konsultasi dokter. Jika perlu, hubungi fasilitas kesehatan setempat.
     </footer>
-  </main>
+  </div>
 </body>
 </html>
