@@ -202,12 +202,43 @@
 </div>
 
 <script>
-// KNOWLEDGE BASE
+// KNOWLEDGE BASE (PERTANYAAN & JAWABAN GEJALA PENYAKIT)
 const knowledge = [
-  { title: "apa itu pneumonia", answer: "Pneumonia adalah infeksi paru-paru yang menyebabkan alveoli terisi cairan atau nanah. Gejala: demam, batuk, sesak napas." },
-  { title: "cara mencegah flu", answer: "Cuci tangan, vaksinasi, istirahat cukup, konsumsi makanan bergizi, dan hindari kontak dengan orang sakit." },
-  { title: "kapan harus ke ugd", answer: "Segera ke UGD jika sesak berat, nyeri dada hebat, pendarahan berat, atau tidak sadar." },
-  { title: "apa itu hipertensi", answer: "Hipertensi adalah tekanan darah tinggi yang berlangsung lama dan dapat menyebabkan komplikasi serius." }
+  { title: "apa itu pneumonia", answer: "Pneumonia adalah infeksi paru-paru. Gejala: demam, batuk, sesak napas." },
+  { title: "gejala diabetes", answer: "Sering haus, sering BAK, cepat lelah, berat badan turun." },
+  { title: "gejala tipes", answer: "Demam >3 hari, lemas, nyeri perut, mual." },
+  { title: "gejala asma", answer: "Sesak napas, mengi, dada berat." },
+  { title: "gejala maag", answer: "Nyeri ulu hati, mual, perut perih." },
+  { title: "gejala anemia", answer: "Lemas, pucat, pusing." },
+  { title: "gejala covid", answer: "Demam, batuk kering, anosmia." },
+  { title: "gejala demam berdarah", answer: "Demam tinggi, nyeri sendi, bintik merah." },
+  { title: "gejala hipertensi", answer: "Sakit kepala, leher kaku, pusing." },
+  { title: "gejala hipotensi", answer: "Pusing berdiri, lemas." },
+  { title: "gejala stroke", answer: "Wajah mencong, bicara pelo, tangan lemah." },
+  { title: "gejala serangan jantung", answer: "Nyeri dada kiri menjalar ke lengan." },
+  { title: "gejala gagal ginjal", answer: "Bengkak kaki, sedikit urine." },
+  { title: "gejala batu ginjal", answer: "Nyeri pinggang hebat." },
+  { title: "gejala hepatitis", answer: "Kulit kuning, mual." },
+  { title: "gejala tuberkulosis", answer: "Batuk >2 minggu, keringat malam." },
+  { title: "gejala diare", answer: "BAB cair >3x sehari." },
+  { title: "gejala konstipasi", answer: "Susah BAB." },
+  { title: "gejala vertigo", answer: "Pusing berputar." },
+  { title: "gejala gagal napas", answer: "Sesak berat, napas cepat." },
+  { title: "gejala infeksi saluran kemih", answer: "Nyeri saat BAK." },
+  { title: "gejala radang usus", answer: "Nyeri perut, diare." },
+  { title: "gejala radang tenggorokan", answer: "Sakit menelan." },
+  { title: "gejala sinusitis", answer: "Hidung tersumbat, nyeri wajah." },
+  { title: "gejala kolesterol tinggi", answer: "Kaku leher, pegal." },
+  { title: "gejala asam urat", answer: "Nyeri sendi, bengkak." },
+  { title: "gejala kanker paru", answer: "Batuk darah, sesak." },
+  { title: "gejala kanker payudara", answer: "Benjolan pada payudara." },
+  { title: "gejala gerd", answer: "Panas di dada." },
+  { title: "gejala alergi", answer: "Gatal, bersin, ruam." },
+  { title: "gejala infeksi telinga", answer: "Nyeri telinga." },
+  { title: "gejala dehidrasi", answer: "Haus, bibir kering." },
+  { title: "gejala bronkitis", answer: "Batuk berdahak." },
+  { title: "gejala obesitas", answer: "Berat badan berlebih." },
+  { title: "gejala gangguan tiroid", answer: "Berat badan naik/turun drastis." }
 ];
 
 const chatBody = document.getElementById("chatBody");
@@ -238,7 +269,31 @@ function reply(question) {
 
   if (found) {
     addMessage(found.answer, "bot");
-  } else if (q.includes("demam") || q.includes("batuk")) {
+    return;
+  }
+
+  if (q.includes("diagnosa") || q.includes("periksa penyakit")) {
+    startDiagnosis();
+    return;
+  }
+
+  if (q.includes("sesak") && q.includes("nyeri dada")) {
+    addMessage("Tanda darurat medis! Segera ke UGD.", "bot");
+    return;
+  }
+
+  if (q.includes("demam") && q.includes("batuk")) {
+    addMessage("Kemungkinan infeksi saluran napas. Perbanyak istirahat dan cairan.", "bot");
+    return;
+  }
+
+  if (q.includes("obat")) {
+    addMessage("Gunakan obat sesuai anjuran dokter atau apoteker.", "bot");
+    return;
+  }
+
+  addMessage("Saya belum dapat memastikan keluhan Anda. Ketik 'diagnosa' untuk pemeriksaan otomatis.", "bot");
+} else if (q.includes("demam") || q.includes("batuk")) {
     addMessage("Kemungkinan Anda mengalami infeksi ringan. Istirahat cukup dan banyak minum. Jika memburuk, segera ke dokter.", "bot");
   } else if (q.includes("obat")) {
     addMessage("Gunakan obat sesuai anjuran dokter atau apoteker. Jangan mengonsumsi obat sembarangan.", "bot");
@@ -253,24 +308,70 @@ function setQuestion(text) {
 }
 
 function checkSymptom() {
-  const demam = document.getElementById("demam").checked;
-  const batuk = document.getElementById("batuk").checked;
-  const sesak = document.getElementById("sesak").checked;
-  const dada = document.getElementById("dada").checked;
-  const darah = document.getElementById("darah").checked;
+  startDiagnosis();
+}
 
-  let result = "";
+// MODE DIAGNOSA BERTAHAP
+let diagStep = 0;
+let diagData = {};
 
-  if (darah) result = "Pendarahan berat terdeteksi. Segera ke UGD!";
-  else if (sesak && dada) result = "Sesak napas dan nyeri dada. Kondisi darurat, segera ke UGD!";
-  else if (demam && batuk && sesak) result = "Gejala mengarah ke infeksi paru. Segera konsultasi dokter.";
-  else if (demam || batuk) result = "Gejala ringan, perbanyak istirahat dan minum air putih.";
-  else result = "Tidak ada gejala serius terdeteksi.";
+function startDiagnosis() {
+  diagStep = 1;
+  diagData = {};
+  addMessage("Mode diagnosa dimulai. Apakah Anda mengalami demam? (ya/tidak)", "bot");
+}
 
-  addMessage(result, "bot");
+function nextDiagnosis(answer) {
+  const a = answer.toLowerCase();
+
+  if (diagStep === 1) {
+    diagData.demam = a === "ya";
+    diagStep++;
+    addMessage("Apakah Anda mengalami batuk? (ya/tidak)", "bot");
+    return;
+  }
+
+  if (diagStep === 2) {
+    diagData.batuk = a === "ya";
+    diagStep++;
+    addMessage("Apakah Anda mengalami sesak napas? (ya/tidak)", "bot");
+    return;
+  }
+
+  if (diagStep === 3) {
+    diagData.sesak = a === "ya";
+    diagStep++;
+    addMessage("Apakah Anda mengalami nyeri dada? (ya/tidak)", "bot");
+    return;
+  }
+
+  if (diagStep === 4) {
+    diagData.dada = a === "ya";
+    diagStep = 0;
+
+    if (diagData.demam && diagData.batuk && diagData.sesak)
+      addMessage("Hasil diagnosa: Mengarah ke Pneumonia.", "bot");
+    else if (diagData.sesak && diagData.dada)
+      addMessage("Hasil diagnosa: Kondisi darurat. Segera ke UGD!", "bot");
+    else if (diagData.demam && diagData.batuk)
+      addMessage("Hasil diagnosa: Infeksi saluran pernapasan.", "bot");
+    else if (diagData.demam)
+      addMessage("Hasil diagnosa: Demam umum.", "bot");
+    else
+      addMessage("Hasil diagnosa: Tidak ditemukan gejala serius.", "bot");
+  }
 }
 
 userInput.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const text = userInput.value.trim().toLowerCase();
+    if (diagStep > 0) {
+      addMessage(userInput.value, "user");
+      userInput.value = "";
+      nextDiagnosis(text);
+    } else sendMessage();
+  }
+});("keydown", function(e) {
   if (e.key === "Enter") sendMessage();
 });
 </script>
