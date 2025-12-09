@@ -349,16 +349,26 @@ function nextDiagnosis(answer) {
     diagData.dada = a === "ya";
     diagStep = 0;
 
-    if (diagData.demam && diagData.batuk && diagData.sesak)
+    if (diagData.demam && diagData.batuk && diagData.sesak) {
       addMessage("Hasil diagnosa: Mengarah ke Pneumonia.", "bot");
-    else if (diagData.sesak && diagData.dada)
-      addMessage("Hasil diagnosa: Kondisi darurat. Segera ke UGD!", "bot");
-    else if (diagData.demam && diagData.batuk)
+      addMessage("Tingkat keparahan: TINGGI (Segera ke dokter/RS)", "bot");
+    }
+    else if (diagData.sesak && diagData.dada) {
+      addMessage("Hasil diagnosa: Kondisi darurat.", "bot");
+      addMessage("Tingkat keparahan: KRITIS (Segera ke UGD!)", "bot");
+    }
+    else if (diagData.demam && diagData.batuk) {
       addMessage("Hasil diagnosa: Infeksi saluran pernapasan.", "bot");
-    else if (diagData.demam)
+      addMessage("Tingkat keparahan: SEDANG (Istirahat + konsultasi jika memburuk)", "bot");
+    }
+    else if (diagData.demam) {
       addMessage("Hasil diagnosa: Demam umum.", "bot");
-    else
+      addMessage("Tingkat keparahan: RINGAN (Banyak minum & istirahat)", "bot");
+    }
+    else {
       addMessage("Hasil diagnosa: Tidak ditemukan gejala serius.", "bot");
+      addMessage("Tingkat keparahan: SANGAT RINGAN", "bot");
+    }
   }
 }
 
