@@ -1,116 +1,279 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pengertian Pneumonia</title>
+  <meta charset="UTF-8">
+  <title>Chatbot Kesehatan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    :root{ --bg:#f6fbff; --card:#ffffff; --accent:#0b7285; --muted:#556677; }
-    body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#eef8ff 0%,var(--bg) 100%); color:#122; margin:0; padding:24px;}
-    .container{max-width:900px;margin:0 auto;padding:20px}
-    header{display:flex;gap:16px;align-items:center;margin-bottom:18px}
-    header img{width:72px;height:72px;border-radius:10px;object-fit:cover;box-shadow:0 6px 18px rgba(11,114,133,0.08)}
-    h1{margin:0;font-size:24px;color:var(--accent)}
-    p.lead{margin:8px 0 20px;color:var(--muted)}
-    .card{background:var(--card);border-radius:12px;box-shadow:0 8px 24px rgba(13,38,59,0.06);padding:18px;margin-bottom:16px}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:16px}
-    @media (max-width:880px){.grid{grid-template-columns:1fr}}
-    .images{display:flex;flex-direction:column;gap:12px}
-    figure{margin:0;background:#fbfeff;border-radius:8px;padding:8px;display:flex;flex-direction:column;align-items:center}
-    figure img{max-width:100%;border-radius:6px;display:block}
-    figcaption{font-size:13px;color:var(--muted);margin-top:6px}
-    ul{margin:0 0 12px 18px}
-    .small{font-size:14px;color:var(--muted)}
-    footer{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
-    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #ffffff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 900px;
+      height: 90vh;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 30%;
+      background: linear-gradient(to bottom, #1e88e5, #42a5f5);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 { margin-top: 0; }
+
+    .sidebar p { font-size: 14px; }
+
+    .quick-btn {
+      margin: 5px 0;
+      padding: 8px;
+      border: none;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .quick-btn:hover { background: rgba(255,255,255,0.35); }
+
+    .symptom-box {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.15);
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .symptom-box label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .main-chat {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #1e88e5;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #f7f9fc;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .user {
+      background: #1e88e5;
+      color: #fff;
+      margin-left: auto;
+      border-bottom-right-radius: 0;
+    }
+
+    .bot {
+      background: #e0e0e0;
+      color: #333;
+      margin-right: auto;
+      border-top-left-radius: 0;
+    }
+
+    .chat-input {
+      padding: 10px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .chat-input button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #1e88e5;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .chat-input button:hover { background: #1565c0; }
+
+    .note {
+      margin-top: auto;
+      font-size: 11px;
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="OIP.jpg" alt="Ilustrasi sistem pernapasan">
-      <div>
-        <h1>Pengertian Pneumonia</h1>
-        <p class="lead">Ringkasan singkat tentang apa itu pneumonia, penyebab, gejala, dan pencegahannya disertai gambar paru-paru dan foto rontgen.</p>
-      </div>
-    </header>
 
-    <div class="grid">
-      <main>
-        <section class="card">
-          <h2>Apa itu pneumonia?</h2>
-          <p>Pneumonia adalah infeksi pada paru-paru yang menyebabkan kantung udara kecil (alveoli) menjadi meradang dan terisi cairan atau nanah. Hal ini mengganggu pertukaran oksigen dan karbon dioksida sehingga penderitanya mungkin mengalami sesak napas dan penurunan kadar oksigen dalam darah.</p>
-        </section>
+<div class="chat-container">
 
-        <section class="card">
-          <h2>Penyebab</h2>
-          <ul>
-            <li>Bakteri (contoh: <em>Streptococcus pneumoniae</em>).</li>
-            <li>Virus (mis. influenza, RSV, SARS-CoV-2).</li>
-            <li>Jamur (lebih jarang, biasanya pada orang dengan imunitas lemah).</li>
-            <li>Aspirasi (masuknya material dari mulut/kerongkongan ke saluran napas).</li>
-          </ul>
-          <p class="small">Jenis pengobatan bergantung pada penyebab: antibiotik untuk bakteri, antivirus/terapi suportif untuk virus, dan antijamur untuk infeksi jamur.</p>
-        </section>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>HealthBot</h2>
+    <p>Chatbot kesehatan offline (tanpa API).</p>
 
-        <section class="card">
-          <h2>Gejala umum</h2>
-          <ul>
-            <li>Demam dan menggigil</li>
-            <li>Batuk (dengan atau tanpa dahak berwarna)</li>
-            <li>Sesak napas atau napas cepat</li>
-            <li>Nyeri dada saat bernapas atau batuk</li>
-            <li>Merasa lelah dan kehilangan nafsu makan</li>
-          </ul>
-        </section>
+    <h4>Topik Cepat</h4>
+    <button class="quick-btn" onclick="setQuestion('Apa itu pneumonia?')">Apa itu pneumonia?</button>
+    <button class="quick-btn" onclick="setQuestion('Cara mencegah flu')">Cara mencegah flu</button>
+    <button class="quick-btn" onclick="setQuestion('Kapan harus ke UGD')">Kapan harus ke UGD</button>
 
-        <section class="card">
-          <h2>Pencegahan dan tindakan</h2>
-          <ul>
-            <li>Vaksinasi (mis. vaksin pneumokokus, vaksin influenza).</li>
-            <li>Cuci tangan dan etika batuk/bersin.</li>
-            <li>Berhenti merokok dan jaga kebersihan lingkungan.</li>
-            <li>Segera ke fasilitas kesehatan jika mengalami gejala berat (sesak hebat, warna kebiruan pada bibir/ujung jari, penurunan kesadaran).</li>
-          </ul>
-        </section>
-
-        <section class="card">
-          <h2>Catatan penting</h2>
-          <p>Pneumonia dapat ringan hingga berat. Bayi, lansia, dan orang dengan gangguan sistem imun berisiko mengalami komplikasi serius—oleh karena itu diagnosis dini dan perawatan yang tepat sangat penting.</p>
-        </section>
-      </main>
-
-      <aside>
-        <div class="card images">
-          <figure>
-            <img src=OIP.jpg/>
-            <figcaption>Diagram saluran napas dan paru-paru (ilustrasi).</figcaption>
-          </figure>
-
-          <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Pneumonia.jpg" alt="Rontgen dada menunjukkan pneumonia" />
-            <figcaption>Rontgen dada (chest X-ray) yang menunjukkan area keburaman pada paru akibat pneumonia.</figcaption>
-          </figure>
-
-          <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Normal_and_Pneumonia_Chest_XRay_Comparison.png" alt="Perbandingan paru normal dan pneumonia" />
-            <figcaption>Perbandingan rontgen paru normal dan paru dengan pneumonia.</figcaption>
-          </figure>
-
-          <p class="small">Sumber gambar: Wikimedia Commons (lisensi publik atau bebas pakai). Jika Anda ingin menggunakan gambar lokal, ganti atribut <code>src</code> dengan path file Anda (mis. <code>images/paruparu.png</code>).</p>
-        </div>
-
-        <div class="card">
-          <h3>Cetak / Simpan</h3>
-          <p class="small">Klik tombol berikut untuk mencetak halaman ini atau menyimpannya sebagai PDF melalui dialog cetak browser.</p>
-          <a href="#" class="btn" onclick="window.print();return false;">Cetak / Simpan PDF</a>
-        </div>
-      </aside>
+    <div class="symptom-box">
+      <strong>Symptom Checker</strong><br>
+      <label><input type="checkbox" id="demam"> Demam</label>
+      <label><input type="checkbox" id="batuk"> Batuk</label>
+      <label><input type="checkbox" id="sesak"> Sesak Napas</label>
+      <label><input type="checkbox" id="dada"> Nyeri Dada</label>
+      <label><input type="checkbox" id="darah"> Pendarahan Berat</label>
+      <button class="quick-btn" onclick="checkSymptom()">Periksa</button>
     </div>
 
-    <footer>
-      Halaman edukasi sederhana — bukan pengganti konsultasi dokter. Jika perlu, hubungi fasilitas kesehatan setempat.
-    </footer>
+    <div class="note">
+      Bukan pengganti konsultasi dokter.
+    </div>
   </div>
+
+  <!-- CHAT AREA -->
+  <div class="main-chat">
+    <div class="chat-header">
+      <div class="avatar">HB</div>
+      <div>
+        <strong>HealthBot</strong><br>
+        <small>Siap membantu Anda</small>
+      </div>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Tanyakan sesuatu tentang kesehatan...">
+      <button onclick="sendMessage()">Kirim</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// KNOWLEDGE BASE
+const knowledge = [
+  { title: "apa itu pneumonia", answer: "Pneumonia adalah infeksi paru-paru yang menyebabkan alveoli terisi cairan atau nanah. Gejala: demam, batuk, sesak napas." },
+  { title: "cara mencegah flu", answer: "Cuci tangan, vaksinasi, istirahat cukup, konsumsi makanan bergizi, dan hindari kontak dengan orang sakit." },
+  { title: "kapan harus ke ugd", answer: "Segera ke UGD jika sesak berat, nyeri dada hebat, pendarahan berat, atau tidak sadar." },
+  { title: "apa itu hipertensi", answer: "Hipertensi adalah tekanan darah tinggi yang berlangsung lama dan dapat menyebabkan komplikasi serius." }
+];
+
+const chatBody = document.getElementById("chatBody");
+const userInput = document.getElementById("userInput");
+
+addMessage("Halo! Saya HealthBot. Tanyakan apa saja tentang kesehatan.", "bot");
+
+function addMessage(text, sender) {
+  const div = document.createElement("div");
+  div.className = `message ${sender}`;
+  div.textContent = text;
+  chatBody.appendChild(div);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text) return;
+  addMessage(text, "user");
+  userInput.value = "";
+
+  setTimeout(() => reply(text), 600);
+}
+
+function reply(question) {
+  const q = question.toLowerCase();
+  const found = knowledge.find(k => q.includes(k.title));
+
+  if (found) {
+    addMessage(found.answer, "bot");
+  } else if (q.includes("demam") || q.includes("batuk")) {
+    addMessage("Kemungkinan Anda mengalami infeksi ringan. Istirahat cukup dan banyak minum. Jika memburuk, segera ke dokter.", "bot");
+  } else if (q.includes("obat")) {
+    addMessage("Gunakan obat sesuai anjuran dokter atau apoteker. Jangan mengonsumsi obat sembarangan.", "bot");
+  } else {
+    addMessage("Maaf, saya belum memahami pertanyaan Anda sepenuhnya. Silakan jelaskan gejala atau keluhan lebih detail.", "bot");
+  }
+}
+
+function setQuestion(text) {
+  userInput.value = text;
+  userInput.focus();
+}
+
+function checkSymptom() {
+  const demam = document.getElementById("demam").checked;
+  const batuk = document.getElementById("batuk").checked;
+  const sesak = document.getElementById("sesak").checked;
+  const dada = document.getElementById("dada").checked;
+  const darah = document.getElementById("darah").checked;
+
+  let result = "";
+
+  if (darah) result = "Pendarahan berat terdeteksi. Segera ke UGD!";
+  else if (sesak && dada) result = "Sesak napas dan nyeri dada. Kondisi darurat, segera ke UGD!";
+  else if (demam && batuk && sesak) result = "Gejala mengarah ke infeksi paru. Segera konsultasi dokter.";
+  else if (demam || batuk) result = "Gejala ringan, perbanyak istirahat dan minum air putih.";
+  else result = "Tidak ada gejala serius terdeteksi.";
+
+  addMessage(result, "bot");
+}
+
+userInput.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") sendMessage();
+});
+</script>
+
 </body>
 </html>
