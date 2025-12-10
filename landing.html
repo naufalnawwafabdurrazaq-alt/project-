@@ -1,389 +1,143 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Chatbot Kesehatan</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #e3f2fd, #ffffff);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+<meta charset="UTF-8">
+<title>Chatbot AI Rumah Sakit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    .chat-container {
-      width: 100%;
-      max-width: 900px;
-      height: 90vh;
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      display: flex;
-      overflow: hidden;
-    }
+.chat-container {
+  width: 100%;
+  max-width: 420px;
+  height: 580px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
 
-    .sidebar {
-      width: 30%;
-      background: linear-gradient(to bottom, #1e88e5, #42a5f5);
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-    }
+.chat-header {
+  background: #0d6efd;
+  color: white;
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+  text-align: center;
+}
 
-    .sidebar h2 { margin-top: 0; }
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #e9ecef;
+}
 
-    .sidebar p { font-size: 14px; }
+.user-message, .bot-message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  max-width: 80%;
+  font-size: 14px;
+}
 
-    .quick-btn {
-      margin: 5px 0;
-      padding: 8px;
-      border: none;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      cursor: pointer;
-    }
+.user-message {
+  background: #0d6efd;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
 
-    .quick-btn:hover { background: rgba(255,255,255,0.35); }
+.bot-message {
+  background: white;
+  border: 1px solid #ccc;
+}
 
-    .symptom-box {
-      margin-top: 20px;
-      background: rgba(255,255,255,0.15);
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 14px;
-    }
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
 
-    .symptom-box label {
-      display: block;
-      margin: 5px 0;
-    }
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+}
 
-    .main-chat {
-      width: 70%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .chat-header {
-      padding: 15px;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .avatar {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: #1e88e5;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-    }
-
-    .chat-body {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-      background: #f7f9fc;
-    }
-
-    .message {
-      max-width: 70%;
-      padding: 10px 14px;
-      margin-bottom: 10px;
-      border-radius: 12px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .user {
-      background: #1e88e5;
-      color: #fff;
-      margin-left: auto;
-      border-bottom-right-radius: 0;
-    }
-
-    .bot {
-      background: #e0e0e0;
-      color: #333;
-      margin-right: auto;
-      border-top-left-radius: 0;
-    }
-
-    .chat-input {
-      padding: 10px;
-      border-top: 1px solid #ddd;
-      display: flex;
-      gap: 10px;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .chat-input button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #1e88e5;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .chat-input button:hover { background: #1565c0; }
-
-    .note {
-      margin-top: auto;
-      font-size: 11px;
-      opacity: 0.9;
-    }
-  </style>
+.chat-input button {
+  margin-left: 5px;
+  padding: 10px 15px;
+  border: none;
+  background: #0d6efd;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
 </head>
+
 <body>
 
 <div class="chat-container">
-
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <h2>HealthBot</h2>
-    <p>Chatbot kesehatan offline (tanpa API).</p>
-
-    <h4>Topik Cepat</h4>
-    <button class="quick-btn" onclick="setQuestion('Apa itu pneumonia?')">Apa itu pneumonia?</button>
-    <button class="quick-btn" onclick="setQuestion('Cara mencegah flu')">Cara mencegah flu</button>
-    <button class="quick-btn" onclick="setQuestion('Kapan harus ke UGD')">Kapan harus ke UGD</button>
-
-    <div class="symptom-box">
-      <strong>Symptom Checker</strong><br>
-      <label><input type="checkbox" id="demam"> Demam</label>
-      <label><input type="checkbox" id="batuk"> Batuk</label>
-      <label><input type="checkbox" id="sesak"> Sesak Napas</label>
-      <label><input type="checkbox" id="dada"> Nyeri Dada</label>
-      <label><input type="checkbox" id="darah"> Pendarahan Berat</label>
-      <button class="quick-btn" onclick="checkSymptom()">Periksa</button>
-    </div>
-
-    <div class="note">
-      Bukan pengganti konsultasi dokter.
-    </div>
+  <div class="chat-header">
+    <h3>Chatbot RS Sehat Sentosa</h3>
+    <small>Layanan Informasi Rumah Sakit Otomatis</small>
   </div>
 
-  <!-- CHAT AREA -->
-  <div class="main-chat">
-    <div class="chat-header">
-      <div class="avatar">HB</div>
-      <div>
-        <strong>HealthBot</strong><br>
-        <small>Siap membantu Anda</small>
-      </div>
-    </div>
+  <div class="chat-messages" id="chatBox"></div>
 
-    <div class="chat-body" id="chatBody"></div>
-
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Tanyakan sesuatu tentang kesehatan...">
-      <button onclick="sendMessage()">Kirim</button>
-    </div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Tanyakan tentang layanan RS...">
+    <button onclick="sendMessage()">Kirim</button>
   </div>
-
 </div>
 
 <script>
-// KNOWLEDGE BASE (PERTANYAAN & JAWABAN GEJALA PENYAKIT)
-const knowledge = [
-  { title: "apa itu pneumonia", answer: "Pneumonia adalah infeksi paru-paru. Gejala: demam, batuk, sesak napas." },
-  { title: "gejala diabetes", answer: "Sering haus, sering BAK, cepat lelah, berat badan turun." },
-  { title: "gejala tipes", answer: "Demam >3 hari, lemas, nyeri perut, mual." },
-  { title: "gejala asma", answer: "Sesak napas, mengi, dada berat." },
-  { title: "gejala maag", answer: "Nyeri ulu hati, mual, perut perih." },
-  { title: "gejala anemia", answer: "Lemas, pucat, pusing." },
-  { title: "gejala covid", answer: "Demam, batuk kering, anosmia." },
-  { title: "gejala demam berdarah", answer: "Demam tinggi, nyeri sendi, bintik merah." },
-  { title: "gejala hipertensi", answer: "Sakit kepala, leher kaku, pusing." },
-  { title: "gejala hipotensi", answer: "Pusing berdiri, lemas." },
-  { title: "gejala stroke", answer: "Wajah mencong, bicara pelo, tangan lemah." },
-  { title: "gejala serangan jantung", answer: "Nyeri dada kiri menjalar ke lengan." },
-  { title: "gejala gagal ginjal", answer: "Bengkak kaki, sedikit urine." },
-  { title: "gejala batu ginjal", answer: "Nyeri pinggang hebat." },
-  { title: "gejala hepatitis", answer: "Kulit kuning, mual." },
-  { title: "gejala tuberkulosis", answer: "Batuk >2 minggu, keringat malam." },
-  { title: "gejala diare", answer: "BAB cair >3x sehari." },
-  { title: "gejala konstipasi", answer: "Susah BAB." },
-  { title: "gejala vertigo", answer: "Pusing berputar." },
-  { title: "gejala gagal napas", answer: "Sesak berat, napas cepat." },
-  { title: "gejala infeksi saluran kemih", answer: "Nyeri saat BAK." },
-  { title: "gejala radang usus", answer: "Nyeri perut, diare." },
-  { title: "gejala radang tenggorokan", answer: "Sakit menelan." },
-  { title: "gejala sinusitis", answer: "Hidung tersumbat, nyeri wajah." },
-  { title: "gejala kolesterol tinggi", answer: "Kaku leher, pegal." },
-  { title: "gejala asam urat", answer: "Nyeri sendi, bengkak." },
-  { title: "gejala kanker paru", answer: "Batuk darah, sesak." },
-  { title: "gejala kanker payudara", answer: "Benjolan pada payudara." },
-  { title: "gejala gerd", answer: "Panas di dada." },
-  { title: "gejala alergi", answer: "Gatal, bersin, ruam." },
-  { title: "gejala infeksi telinga", answer: "Nyeri telinga." },
-  { title: "gejala dehidrasi", answer: "Haus, bibir kering." },
-  { title: "gejala bronkitis", answer: "Batuk berdahak." },
-  { title: "gejala obesitas", answer: "Berat badan berlebih." },
-  { title: "gejala gangguan tiroid", answer: "Berat badan naik/turun drastis." }
-];
+const API_KEY = "ISI_API_KEY_KAMU";
 
-const chatBody = document.getElementById("chatBody");
-const userInput = document.getElementById("userInput");
+async function sendMessage() {
+  let input = document.getElementById("userInput").value;
+  let chatBox = document.getElementById("chatBox");
+  if(input === "") return;
 
-addMessage("Halo! Saya HealthBot. Tanyakan apa saja tentang kesehatan.", "bot");
+  chatBox.innerHTML += `<div class="user-message">${input}</div>`;
 
-function addMessage(text, sender) {
-  const div = document.createElement("div");
-  div.className = `message ${sender}`;
-  div.textContent = text;
-  chatBody.appendChild(div);
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
+  // Prompt khusus Rumah Sakit
+  let prompt = `
+  Anda adalah chatbot resmi Rumah Sakit.
+  Jawablah dengan bahasa Indonesia yang sopan.
+  Fokus pada informasi layanan rumah sakit.
+  Pertanyaan: ${input}
+  `;
 
-function sendMessage() {
-  const text = userInput.value.trim();
-  if (!text) return;
-  addMessage(text, "user");
-  userInput.value = "";
-
-  setTimeout(() => reply(text), 600);
-}
-
-function reply(question) {
-  const q = question.toLowerCase();
-  const found = knowledge.find(k => q.includes(k.title));
-
-  if (found) {
-    addMessage(found.answer, "bot");
-    return;
-  }
-
-  if (q.includes("diagnosa") || q.includes("periksa penyakit")) {
-    startDiagnosis();
-    return;
-  }
-
-  if (q.includes("sesak") && q.includes("nyeri dada")) {
-    addMessage("Tanda darurat medis! Segera ke UGD.", "bot");
-    return;
-  }
-
-  if (q.includes("demam") && q.includes("batuk")) {
-    addMessage("Kemungkinan infeksi saluran napas. Perbanyak istirahat dan cairan.", "bot");
-    return;
-  }
-
-  if (q.includes("obat")) {
-    addMessage("Gunakan obat sesuai anjuran dokter atau apoteker.", "bot");
-    return;
-  }
-
-  addMessage("Saya belum dapat memastikan keluhan Anda. Ketik 'diagnosa' untuk pemeriksaan otomatis.", "bot");
-} else if (q.includes("demam") || q.includes("batuk")) {
-    addMessage("Kemungkinan Anda mengalami infeksi ringan. Istirahat cukup dan banyak minum. Jika memburuk, segera ke dokter.", "bot");
-  } else if (q.includes("obat")) {
-    addMessage("Gunakan obat sesuai anjuran dokter atau apoteker. Jangan mengonsumsi obat sembarangan.", "bot");
-  } else {
-    addMessage("Maaf, saya belum memahami pertanyaan Anda sepenuhnya. Silakan jelaskan gejala atau keluhan lebih detail.", "bot");
-  }
-}
-
-function setQuestion(text) {
-  userInput.value = text;
-  userInput.focus();
-}
-
-function checkSymptom() {
-  startDiagnosis();
-}
-
-// MODE DIAGNOSA BERTAHAP
-let diagStep = 0;
-let diagData = {};
-
-function startDiagnosis() {
-  diagStep = 1;
-  diagData = {};
-  addMessage("Mode diagnosa dimulai. Apakah Anda mengalami demam? (ya/tidak)", "bot");
-}
-
-function nextDiagnosis(answer) {
-  const a = answer.toLowerCase();
-
-  if (diagStep === 1) {
-    diagData.demam = a === "ya";
-    diagStep++;
-    addMessage("Apakah Anda mengalami batuk? (ya/tidak)", "bot");
-    return;
-  }
-
-  if (diagStep === 2) {
-    diagData.batuk = a === "ya";
-    diagStep++;
-    addMessage("Apakah Anda mengalami sesak napas? (ya/tidak)", "bot");
-    return;
-  }
-
-  if (diagStep === 3) {
-    diagData.sesak = a === "ya";
-    diagStep++;
-    addMessage("Apakah Anda mengalami nyeri dada? (ya/tidak)", "bot");
-    return;
-  }
-
-  if (diagStep === 4) {
-    diagData.dada = a === "ya";
-    diagStep = 0;
-
-    if (diagData.demam && diagData.batuk && diagData.sesak) {
-      addMessage("Hasil diagnosa: Mengarah ke Pneumonia.", "bot");
-      addMessage("Tingkat keparahan: TINGGI (Segera ke dokter/RS)", "bot");
+  const response = await fetch(
+    "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=" + API_KEY,
+    {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
     }
-    else if (diagData.sesak && diagData.dada) {
-      addMessage("Hasil diagnosa: Kondisi darurat.", "bot");
-      addMessage("Tingkat keparahan: KRITIS (Segera ke UGD!)", "bot");
-    }
-    else if (diagData.demam && diagData.batuk) {
-      addMessage("Hasil diagnosa: Infeksi saluran pernapasan.", "bot");
-      addMessage("Tingkat keparahan: SEDANG (Istirahat + konsultasi jika memburuk)", "bot");
-    }
-    else if (diagData.demam) {
-      addMessage("Hasil diagnosa: Demam umum.", "bot");
-      addMessage("Tingkat keparahan: RINGAN (Banyak minum & istirahat)", "bot");
-    }
-    else {
-      addMessage("Hasil diagnosa: Tidak ditemukan gejala serius.", "bot");
-      addMessage("Tingkat keparahan: SANGAT RINGAN", "bot");
-    }
-  }
-}
+  );
 
-userInput.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    const text = userInput.value.trim().toLowerCase();
-    if (diagStep > 0) {
-      addMessage(userInput.value, "user");
-      userInput.value = "";
-      nextDiagnosis(text);
-    } else sendMessage();
-  }
-});("keydown", function(e) {
-  if (e.key === "Enter") sendMessage();
-});
+  const data = await response.json();
+  let reply = data.candidates[0].content.parts[0].text;
+
+  chatBox.innerHTML += `<div class="bot-message">${reply}</div>`;
+  document.getElementById("userInput").value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
 </script>
 
 </body>
